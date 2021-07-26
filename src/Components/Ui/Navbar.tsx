@@ -39,7 +39,7 @@ export const Navbar = () => {
                 </Typography>
                 <Button onClick={goMarvel} color="inherit">Marvel</Button>
                 <Button onClick={goDc} color="inherit">DC</Button>
-                <Button onClick={goLogin} color="inherit">Login</Button>
+                <Button onClick={goLogin} color="inherit">LogOut</Button>
             </Toolbar>
         </AppBar>
     </div>

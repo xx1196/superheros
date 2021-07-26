@@ -1,22 +1,14 @@
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from "react-router-dom";
-
-import {Navbar} from "../Components/Ui/Navbar";
-import {MarvelScreen} from "../Components/Marvel/MarvelScreen";
-import {DcScreen} from "../Components/Dc/DcScreen";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {LoginScreen} from "../Components/Login/LoginScreen";
+import {DashboardRouter} from "./Childs/DashboardRouter";
 
 export const AppRouter = () => {
     return <Router>
-        <Navbar/>
-
-        <Switch>
-            <Route exact path="/" component={MarvelScreen}/>
-            <Route exact path="/dc" component={DcScreen}/>
-            <Route exact path="/login" component={LoginScreen}/>
-        </Switch>
+        <div>
+            <Switch>
+                <Route exact path="/login" component={LoginScreen}/>
+                <Route path="/" component={DashboardRouter}/>
+            </Switch>
+        </div>
     </Router>
 }
