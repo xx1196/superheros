@@ -2,18 +2,27 @@ import {FC} from "react";
 import {HeroItemProps} from "../../../Interfaces/PropsInterfaces";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
-import {Card, CardActionArea, CardActions, CardContent, CardMedia} from "@material-ui/core";
+import {Card, CardActions, CardContent, CardMedia} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {Hero} from "../../../Interfaces/ModelsInterfaces";
 import {useHistory} from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
-    root: {
+    card: {
         maxWidth: 345,
+        boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.3)",
+        backgroundColor: "#fafafa",
     },
+    media: {
+        height: 300,
+    },
+    button: {
+        margin: 'auto'
+    }
 });
 
-export const HeroItem: FC<HeroItemProps> = ({hero, showMore=true}) => {
+export const HeroItem: FC<HeroItemProps> = ({hero, showMore = true}) => {
     const classes = useStyles();
 
     const history = useHistory();
@@ -22,20 +31,17 @@ export const HeroItem: FC<HeroItemProps> = ({hero, showMore=true}) => {
         history.push(`/hero/${hero.id}`);
     }
 
-    return <Card className={classes.root}>
-        <CardActionArea>
+    return <Grid item xs={12} sm={4} key={hero.id}>
+        <Card className={classes.card}>
             <CardMedia
-                component="img"
-                alt={hero.superhero}
-                height="140"
+                className={classes.media}
                 image={`/assets/heroes/${hero.id}.jpg`}
-                title={hero.superhero}
             />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography color="primary" variant="h5">
                     {hero.superhero}
                 </Typography>
-                <Typography variant="body1" color="textSecondary" component="p">
+                <Typography color="textSecondary" variant="subtitle2">
                     Aparece por primera vez en <Typography color="primary"
                                                            component="p">{hero.first_appearance}</Typography> bajo el
                     alter ego
@@ -55,14 +61,13 @@ export const HeroItem: FC<HeroItemProps> = ({hero, showMore=true}) => {
                     </>
                 }
             </CardContent>
-        </CardActionArea>
-        {
-            showMore && <CardActions>
-                <Button onClick={() => goToHero(hero)} size="small" color="primary">
-                    Ver mas...
-                </Button>
-            </CardActions>
-        }
-
-    </Card>
+            {
+                showMore && <CardActions>
+                    <Button className={classes.button} onClick={() => goToHero(hero)} size="small" color="primary">
+                        Ver mas...
+                    </Button>
+                </CardActions>
+            }
+        </Card>
+    </Grid>
 }
