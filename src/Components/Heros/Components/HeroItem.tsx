@@ -4,6 +4,8 @@ import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
 import {Card, CardActionArea, CardActions, CardContent, CardMedia} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import {Hero} from "../../../Interfaces/ModelsInterfaces";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -11,8 +13,14 @@ const useStyles = makeStyles({
     },
 });
 
-export const HeroItem: FC<HeroItemProps> = ({hero}) => {
+export const HeroItem: FC<HeroItemProps> = ({hero, showMore=true}) => {
     const classes = useStyles();
+
+    const history = useHistory();
+
+    const goToHero = (hero: Hero) => {
+        history.push(`/hero/${hero.id}`);
+    }
 
     return <Card className={classes.root}>
         <CardActionArea>
@@ -20,7 +28,7 @@ export const HeroItem: FC<HeroItemProps> = ({hero}) => {
                 component="img"
                 alt={hero.superhero}
                 height="140"
-                image={`assets/heroes/${hero.id}.jpg`}
+                image={`/assets/heroes/${hero.id}.jpg`}
                 title={hero.superhero}
             />
             <CardContent>
@@ -48,10 +56,13 @@ export const HeroItem: FC<HeroItemProps> = ({hero}) => {
                 }
             </CardContent>
         </CardActionArea>
-        <CardActions>
-            <Button size="small" color="primary">
-                Ver mas...
-            </Button>
-        </CardActions>
+        {
+            showMore && <CardActions>
+                <Button onClick={() => goToHero(hero)} size="small" color="primary">
+                    Ver mas...
+                </Button>
+            </CardActions>
+        }
+
     </Card>
 }

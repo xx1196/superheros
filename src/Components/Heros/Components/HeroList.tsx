@@ -12,7 +12,7 @@ export const HeroList: FC<HeroListProps> = ({publisher}) => {
     return <>
         {
             heroes.map((hero: Hero) => (
-                <HeroItem hero={hero}/>
+                <HeroItem key={hero.id} hero={hero}/>
             ))
         }
     </>

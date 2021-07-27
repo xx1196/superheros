@@ -1,12 +1,15 @@
-import {useParams} from "react-router-dom";
-
-import Typography from '@material-ui/core/Typography';
+import {Redirect, useParams} from "react-router-dom";
 import {HeroScreenParams} from "../../Interfaces/ParamsInterfaces";
+import {GetHeroById} from "../../Selectors/getHeroById";
+import {HeroItem} from "./Components/HeroItem";
 
 export const HeroScreen = () => {
     const {id} = useParams<HeroScreenParams>();
+    const hero = GetHeroById(id);
 
-    return <Typography variant="h1" component="h2">
-        Hero´s # {id}
-    </Typography>
+    if (hero) {
+        return <HeroItem hero={hero} showMore={false}/>
+    } else {
+        return <Redirect to="/"/>
+    }
 }

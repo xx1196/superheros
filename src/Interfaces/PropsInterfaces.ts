@@ -6,4 +6,5 @@ export interface HeroListProps {
 
 export interface HeroItemProps {
     hero: Hero
+    showMore?: boolean
 }
